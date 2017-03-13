@@ -11,7 +11,7 @@ namespace WithingsTests
     public class ProgramTest
     {
         [Test]
-        public void ExampleTest()
+        public void Example2Test()
         {
             Assert.IsTrue(true);
         }
