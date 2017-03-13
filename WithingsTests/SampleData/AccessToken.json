@@ -1,0 +1,7 @@
+﻿{
+  "oauth_consumer_key": "8ecb6d91d1ee66d5c3696c0c803197ed9e8cdff332ff40d5f964430ce9d1",
+  "oauth_nonce": "43b7e5b91bc803f53e243b36e4592a95",
+  "oauth_signature_method": "HMAC-SHA1",
+  "oauth_callback": "https%3A%2F%2Fgithub.com%2FFitabase",
+  "oauth_signature": "EXgoDDzoVojzZL1lXav%2FyinDL1s%3D"
+}
