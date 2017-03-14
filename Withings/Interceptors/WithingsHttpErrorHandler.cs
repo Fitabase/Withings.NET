@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WithingsTests.Models
+namespace Withings.Portable.Interceptors
 {
-    class ActivitySummaryTests
+    class WithingsHttpErrorHandler
     {
-
     }
 }

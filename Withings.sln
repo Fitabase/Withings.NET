@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Withings", "Withings\Withings.csproj", "{E022E2C5-748A-4F46-AABB-D97855CD06A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Withings.Portable", "Withings\Withings.Portable.csproj", "{E022E2C5-748A-4F46-AABB-D97855CD06A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithingsTests", "WithingsTests\WithingsTests.csproj", "{6E3947A7-2E72-4EEA-BE15-90FCFFE1B021}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Withings.Portable.DebugSite", "Withings.Portable.DebugSite\Withings.Portable.DebugSite.csproj", "{D9F2F3FA-18FC-4FAD-A392-BF1B3E96731B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable", "Portable", "{A145C958-740C-46C6-8D77-19146F3DFA51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E022E2C5-748A-4F46-AABB-D97855CD06A9} = {A145C958-740C-46C6-8D77-19146F3DFA51}
+		{6E3947A7-2E72-4EEA-BE15-90FCFFE1B021} = {A145C958-740C-46C6-8D77-19146F3DFA51}
 	EndGlobalSection
 EndGlobal
