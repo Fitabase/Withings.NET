@@ -8,8 +8,8 @@
     <ProjectGuid>{E022E2C5-748A-4F46-AABB-D97855CD06A9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Withings</RootNamespace>
-    <AssemblyName>Withings</AssemblyName>
+    <RootNamespace>Withings.Portable</RootNamespace>
+    <AssemblyName>Withings.Portable</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,6 +35,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Interceptors\WithingsHttpErrorHandler.cs" />
+    <Compile Include="Models\BloodPressure.cs" />
+    <Compile Include="Models\BloodPressureAverage.cs" />
+    <Compile Include="Models\Device.cs" />
+    <Compile Include="Models\DeviceType.cs" />
+    <Compile Include="Models\HeartRate.cs" />
+    <Compile Include="Models\HeartRateAverage.cs" />
+    <Compile Include="Models\LifetimeStats.cs" />
+    <Compile Include="Models\LifetimeTotals.cs" />
+    <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="Models\Weight.cs" />
+    <Compile Include="Models\WeightLog.cs" />
+    <Compile Include="OAuth1\OAuth1RequestToken.cs" />
+    <Compile Include="OAuth1\OAuth1UserAuthorization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,10 +75,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="OAuth1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Withings.Portable.Models
+namespace Withings.Portable.OAuth1
 {
-    class HeartRateAverage
+    class OAuth1Helper
     {
     }
 }

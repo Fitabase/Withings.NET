@@ -8,5 +8,6 @@ namespace Withings.Portable.Interceptors
 {
     class WithingsHttpErrorHandler
     {
+
     }
 }
