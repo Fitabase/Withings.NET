@@ -1,0 +1,37 @@
+﻿{
+ 
+    "status": 0,
+    "body": {
+      "updatetime": 1489441777,
+      "measuregrps": [
+        {
+          "grpid": 745158614,
+          "attrib": 2,
+          "date": 1489440995,
+          "category": 1,
+          "measures": [
+            {
+              "value": 1701,
+              "type": 4,
+              "unit": -3
+            }
+          ]
+        },
+        {
+          "grpid": 745158613,
+          "attrib": 2,
+          "date": 1489440995,
+          "category": 1,
+          "measures": [
+            {
+              "type": 1,
+              "unit": -2,
+              "value": 7711
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    }
+  
+}
