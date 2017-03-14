@@ -34,7 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Interceptors\WithingsHttpErrorHandler.cs" />
+    <Compile Include="JsonDotNetSerializer.cs" />
     <Compile Include="Models\BloodPressure.cs" />
     <Compile Include="Models\BloodPressureAverage.cs" />
     <Compile Include="Models\Device.cs" />
@@ -46,9 +48,14 @@
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\Weight.cs" />
     <Compile Include="Models\WeightLog.cs" />
+    <Compile Include="OAuth1\OAuth1Helper.cs" />
     <Compile Include="OAuth1\OAuth1RequestToken.cs" />
     <Compile Include="OAuth1\OAuth1UserAuthorization.cs" />
+    <Compile Include="OAuth1\OAuth1UserDataAccessToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WithingsAppCredentials.cs" />
+    <Compile Include="WithingsClient.cs" />
+    <Compile Include="WithingsException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
