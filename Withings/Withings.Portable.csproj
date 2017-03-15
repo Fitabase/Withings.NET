@@ -39,13 +39,17 @@
     <Compile Include="Interceptors\WithingsHttpErrorHandler.cs" />
     <Compile Include="IWithingsClient.cs" />
     <Compile Include="JsonDotNetSerializer.cs" />
+    <Compile Include="Models\AuthCredential.cs" />
+
     <Compile Include="Models\BloodPressure.cs" />
     <Compile Include="Models\BloodPressureAverage.cs" />
     <Compile Include="Models\BloodPressureData.cs" />
     <Compile Include="Models\Device.cs" />
+
     <Compile Include="..\DeviceType.cs">
       <Link>Models\DeviceType.cs</Link>
     </Compile>
+
     <Compile Include="OAuth1\DefaultTokenManager.cs" />
     <Compile Include="OAuth1\ITokenManager.cs" />
     <Compile Include="OAuth1\OAuth1Helper.cs" />

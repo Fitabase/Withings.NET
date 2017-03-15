@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Withings.API.Portable
-
 {
-    public class WithingsAppCredentials
+    public interface IWithingsClient
     {
-        public string ConsumerKey { get; set; }
-        public string ConsumerSecret { get; set; }
+
+        // go over interface directions and understand meaning before just plugging in
     }
 }
