@@ -41,6 +41,7 @@
     <Compile Include="JsonDonNetSerializer.cs" />
     <Compile Include="OAuth1\DefaultTokenManager.cs" />
     <Compile Include="OAuth1\ITokenManager.cs" />
+    <Compile Include="OAuth1\OAuth1Helper.cs" />
     <Compile Include="OAuth1\OAuth1RequestToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WithingsAppCredentials.cs" />

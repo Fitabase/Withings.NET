@@ -1,6 +1,4 @@
-﻿
-
-namespace Withings.API.Portable.OAuth1
+﻿namespace Withings.API.Portable.OAuth1
 {
     using System;
     using System.Collections.Generic;

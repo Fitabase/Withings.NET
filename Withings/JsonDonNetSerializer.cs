@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace Withings.API.Portable
 {
+    internal class JsonDotNetSerializer
+    { 
     private readonly JsonSerializer _jsonSerializer;
 
     public JsonDotNetSerializer()
