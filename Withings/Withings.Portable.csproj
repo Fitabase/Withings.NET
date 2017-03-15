@@ -38,7 +38,12 @@
     <Compile Include="EmptyDateToMinDateConverter.cs" />
     <Compile Include="Interceptors\WithingsHttpErrorHandler.cs" />
     <Compile Include="IWithingsClient.cs" />
-    <Compile Include="JsonDonNetSerializer.cs" />
+    <Compile Include="JsonDotNetSerializer.cs" />
+    <Compile Include="Models\AuthCredential.cs" />
+    <Compile Include="Models\BloodPressure.cs" />
+    <Compile Include="Models\BloodPressureAverage.cs" />
+    <Compile Include="Models\BloodPressureData.cs" />
+    <Compile Include="Models\Device.cs" />
     <Compile Include="OAuth1\DefaultTokenManager.cs" />
     <Compile Include="OAuth1\ITokenManager.cs" />
     <Compile Include="OAuth1\OAuth1Helper.cs" />
@@ -72,9 +77,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

@@ -8,5 +8,7 @@ namespace Withings.API.Portable
 {
     public interface IWithingsClient
     {
+
+        // go over interface directions and understand meaning before just plugging in
     }
 }
