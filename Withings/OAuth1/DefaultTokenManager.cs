@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Withings.API.Portable.OAuth1
 {
-    class DefaultTokenManager
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    class DefaultTokenManager : ITokenManager //from ITokenManager
     {
     }
 }

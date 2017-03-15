@@ -39,6 +39,9 @@
     <Compile Include="Interceptors\WithingsHttpErrorHandler.cs" />
     <Compile Include="IWithingsClient.cs" />
     <Compile Include="JsonDonNetSerializer.cs" />
+    <Compile Include="OAuth1\DefaultTokenManager.cs" />
+    <Compile Include="OAuth1\ITokenManager.cs" />
+    <Compile Include="OAuth1\OAuth1RequestToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WithingsAppCredentials.cs" />
     <Compile Include="WithingsClient.cs" />
@@ -70,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="OAuth1\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Withings.API.Portable.OAuth1
 {
-    class ITokenManager
+    public interface ITokenManager
     {
+        Task<OAuth1RequestToken> AccessTokenAsynch(WithingsClient client);
     }
 }
