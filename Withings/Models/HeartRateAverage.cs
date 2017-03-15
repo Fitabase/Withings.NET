@@ -8,5 +8,7 @@ namespace Withings.Portable.Models
 {
     class HeartRateAverage
     {
+        public string Condition { get; set; }
+        public int Systolic { get; set; }
     }
 }

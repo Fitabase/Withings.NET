@@ -8,5 +8,6 @@ namespace Withings.Portable.Models
 {
     class HeartRate
     {
+        public int Systolic { get; set; }
     }
 }

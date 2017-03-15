@@ -8,5 +8,8 @@ namespace Withings.Portable.Models
 {
     class BloodPressureAverage
     {
+        public string Condition { get; set; }
+        public int Diastolic { get; set; }
+        public int Systolic { get; set; }
     }
 }
