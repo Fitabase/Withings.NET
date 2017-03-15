@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Withings.Portable.OAuth1;
+using Withings.API.Portable;
+using Withings.API.Portable.OAuth1;
+
 
 namespace Withings.Portable
 {
-   public class WithingsClient 
+   public class WithingsClient : IWithingsClient
     {
         public WithingsAppCredentials AppCredentials { get; private set; }
 
@@ -24,8 +27,8 @@ namespace Withings.Portable
             {
                 _requestToken = value;
                 //If we update the AccessToken after HttpClient has been created, then reconfigure authorization header
-                if (HttpClient != null)
-                    ConfigureAuthorizationHeader();
+                if (HttpClient != null) ;
+                    //ConfigureAuthorizationHeader();
             }
         }
         /// <summary>
@@ -33,7 +36,13 @@ namespace Withings.Portable
         /// </summary>
         public HttpClient HttpClient { get; private set; }
 
-
+        private void ConfigureAutoRefresh(bool enableOAuth1TokenRefresh)
+        {
+            //this.OAuth1TokenAutoRefresh = enableOAuth1TokenRefresh;
+            //if (OAuth1TokenAutoRefresh)
+            //    this.FitbitInterceptorPipeline.Add(new OAuth1AutoRefreshInterceptor());
+            //return;
+        }
 
     }
 }
