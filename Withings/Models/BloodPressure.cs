@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Withings.API.Portable.Models
 {
-    class BloodPressure
+   public class BloodPressure
     {
         public int Diastolic { get; set; }
         public long LogId { get; set; }

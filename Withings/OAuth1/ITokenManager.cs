@@ -8,6 +8,6 @@ namespace Withings.API.Portable.OAuth1
 {
     public interface ITokenManager
     {
-        Task<OAuth1RequestToken> AccessTokenAsynch(WithingsClient client);
+        Task<OAuth1RequestToken> AccessTokenAsync(WithingsClient client);
     }
 }
