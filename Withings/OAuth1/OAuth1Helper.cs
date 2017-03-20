@@ -25,5 +25,7 @@ namespace Withings.API.Portable.OAuth1
 
 
         //Omitting GernateAuthUrl and Task AccessToken/RequestToken 
+
+
     }
 }

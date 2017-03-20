@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using Withings.API.Portable;
 using Withings.API.Portable.OAuth1;
+using AsyncOAuth;
 
 namespace WithingsOAuth1SampleSite.Controllers
 {
@@ -16,74 +17,51 @@ namespace WithingsOAuth1SampleSite.Controllers
         }
 
         //GET : /WithingsAuth/
-        //Setup - Redirects to Withings.com to authorize this app
-        public ActionResult Authorize()
+        //Setup - Redirects to Withings.com to authorize this app First step in the OAuth process is to ask for a temporary request token. 
+        /// From this you should store the RequestToken returned for later processing the auth token.
+        public string GenerateAuthUrlFromRequestToken(RequestToken token, bool forceLogoutBeforeAuth)
         {
-            var appCredentials = new WithingsAppCredentials()
+            var url = Constants.BaseApiUrl + (forceLogoutBeforeAuth ? Constants.LogoutAndAuthorizeUri : Constants.AuthorizeUri);
+            return string.Format("{0}?oauth_token={1}", url, token.Token);
+        }
+        public async Task<RequestToken> GetRequestTokenAsync()
+        {
+            // create authorizer
+            var authorizer = new OAuthAuthorizer(ConsumerKey, ConsumerSecret);
+
+            // get request token
+            var tokenResponse = await authorizer.GetRequestToken(Constants.BaseApiUrl + Constants.TemporaryCredentialsRequestTokenUri);
+            var requestToken = tokenResponse.Token;
+
+            // return the request token
+            return new RequestToken
             {
-                ConsumerKey = ConfigurationManager.AppSettings["WithingsConsumerKey"],
-                ConsumerSecret = ConfigurationManager.AppSettings["WithingsConsumerSecret"]
+                Token = requestToken.Key,
+                Secret = requestToken.Secret
             };
-            //make sure you've set these up in Web.Config under <appSettings>:
-
-            Session["AppCredentials"] = appCredentials;
-
-            //Provide the App Credentials. You get those by registering your app at oauth.withings.com
-            //Configure Withings authenticaiton request to perform a callback to this constructor's Callback method
-            var authenticator = new OAuth1Helper(appCredentials, Request.Url.GetLeftPart(UriPartial.Authority) + "/Withings/Callback");
-            string[] scopes = new string[] { "profile" };
-
-            //string authUrl = authenticator.GenerateAuthUrl(scopes, null);
-            string authUrl = "http://www.localhost";
-
-            return Redirect(authUrl);
         }
-        //Final step. Take this authorization information and use it in the app
-        public async Task<ActionResult> Callback()
+        public async Task<AuthCredential> ProcessApprovedAuthCallbackAsync(RequestToken token)
         {
-            WithingsAppCredentials appCredentials = (WithingsAppCredentials)Session["AppCredentials"];
+            if (token == null)
+                throw new ArgumentNullException("token", "RequestToken cannot be null");
 
-            var authenticator = new OAuth1Helper(appCredentials, Request.Url.GetLeftPart(UriPartial.Authority) + "/Withings/Callback");
+            if (string.IsNullOrWhiteSpace(token.Token))
+                throw new ArgumentNullException("token", "RequestToken.Token must not be null");
 
-            string code = Request.Params["code"];
+            var oauthRequestToken = new AsyncOAuth.RequestToken(token.Token, token.Secret);
+            var authorizer = new OAuthAuthorizer(ConsumerKey, ConsumerSecret);
+            var accessToken = await authorizer.GetAccessToken(Constants.BaseApiUrl + Constants.TemporaryCredentialsAccessTokenUri, oauthRequestToken, token.Verifier);
 
-            OAuth1RequestToken requestToken = await authenticator.ExchangeAuthCodeForRequestTokenAsync(code);
-
-            //Store credentials in FitbitClient. The client in its default implementation manages the Refresh process
-            var withingsClient = GetWithingsClient(requestToken);
-
-            ViewBag.RequestToken = requestToken;
-
-            return View();
-
+            var result = new AuthCredential
+            {
+                AuthToken = accessToken.Token.Key,
+                AuthTokenSecret = accessToken.Token.Secret,
+                UserId = accessToken.ExtraData["encoded_user_id"].FirstOrDefault()
+            };
+            return result;
         }
-        //        /// <summary>
-        //        /// HttpClient and hence FitbitClient are designed to be long-lived for the duration of the session. This method ensures only one client is created for the duration of the session.
-        //        /// More info at: http://stackoverflow.com/questions/22560971/what-is-the-overhead-of-creating-a-new-httpclient-per-call-in-a-webapi-client
-        //        /// </summary>
-        //        /// <returns></returns>
 
-        //        private WithingsClient GetWithingsClient(OAuth1RequestToken requestToken = null)
-        //        {
-        //            if (Session["WithingsClient"] == null)
-        //            {
-        //                if (requestToken != null)
-        //                {
-        //                    var appCredentials = (WithingstAppCredentials)Session["AppCredentials"];
-        //                    WithingsClient client = new WithingsClient(appCredentials, requestToken);
-        //                    Session["WithingsClient"] = client;
-        //                    return client;
-        //                }
-        //                else
-        //                {
-        //                    throw new Exception("First time requesting a WithingsClient from the session you must pass the AccessToken.");
-        //                }
-
-        //            }
-        //            else
-        //            {
-        //                return (WithingsClient)Session["WithingsClient"];
-        //            }
-        //        }
+    }
+       
     }
 }

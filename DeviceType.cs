@@ -8,7 +8,7 @@ namespace Withings.API.Portable.Models
 {
     public enum DeviceType
     {
-        gauge  = 1,
+        gauge = 1,
         Scale = 2
     }
 }

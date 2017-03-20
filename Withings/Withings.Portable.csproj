@@ -40,6 +40,7 @@
     <Compile Include="EmptyDateToMinDateConverter.cs" />
     <Compile Include="Interceptors\WithingsHttpErrorHandler.cs" />
     <Compile Include="IWithingsClient.cs" />
+    <Compile Include="IWithingsInterceptor.cs" />
     <Compile Include="JsonDotNetSerializer.cs" />
     <Compile Include="Models\BloodPressure.cs" />
     <Compile Include="Models\BloodPressureAverage.cs" />
@@ -79,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

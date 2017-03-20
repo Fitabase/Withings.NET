@@ -10,14 +10,14 @@ namespace Withings.API.Portable
 {
     internal class JsonDotNetSerializer
     { 
-    private readonly JsonSerializer _jsonSerializer;
+        private readonly JsonSerializer _jsonSerializer;
 
-    public JsonDotNetSerializer()
-    {
+     public JsonDotNetSerializer()
+     {
         JsonSerializerSettings settings = new JsonSerializerSettings();
         settings.Converters.Add(new EmptyDateToMinDateConverter());
         _jsonSerializer = JsonSerializer.CreateDefault(settings);
-    }
+     }
 
     /// <summary>
     /// Root property value; only required if trying to access nested information or an array is hanging off a property
