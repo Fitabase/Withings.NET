@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Withings.API.Portable;
 using Withings.API.Portable.OAuth1;
 using AsyncOAuth;
+using WithingsOAuth1SampleSite.Models.Authenticator;
 
 namespace WithingsOAuth1SampleSite.Controllers
 {
@@ -19,11 +20,7 @@ namespace WithingsOAuth1SampleSite.Controllers
         //GET : /WithingsAuth/
         //Setup - Redirects to Withings.com to authorize this app First step in the OAuth process is to ask for a temporary request token. 
         /// From this you should store the RequestToken returned for later processing the auth token.
-        public string GenerateAuthUrlFromRequestToken(RequestToken token, bool forceLogoutBeforeAuth)
-        {
-            var url = Constants.BaseApiUrl + (forceLogoutBeforeAuth ? Constants.LogoutAndAuthorizeUri : Constants.AuthorizeUri);
-            return string.Format("{0}?oauth_token={1}", url, token.Token);
-        }
+        
         public async Task<RequestToken> GetRequestTokenAsync()
         {
             // create authorizer
