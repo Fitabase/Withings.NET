@@ -201,6 +201,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Authenticator.cs" />
+    <Compile Include="Models\HttpClient.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\WithingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
