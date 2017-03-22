@@ -17,6 +17,10 @@ namespace WithingsOAuth1SampleSite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public static WithingsClient Create(string consumerKey, string consumerSecret)
+        {
+            var client = OAuthUtility.CreateOAuthClient("consumerKey", "consumerSecret", new AccessToken("accessToken", "accessTokenSecret"));
+        }
         //GET : /WithingsAuth/
         ////Setup - Redirects to Withings.com to authorize this app First step in the OAuth process is to ask for a temporary request token. 
         ///// From this you should store the RequestToken returned for later processing the auth token.

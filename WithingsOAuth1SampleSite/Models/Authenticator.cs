@@ -10,7 +10,7 @@ namespace WithingsOAuth1SampleSite.Models
 {
     public class Authenticator
     {
-        var client = OAuthUtility.CreateOAuthClient("consumerKey", "consumerSecret", new AccessToken("accessToken", "accessTokenSecret"));
+       
         public string ConsumerKey { get; private set; }
         public string ConsumerSecret { get; private set; }
 
