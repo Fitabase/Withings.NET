@@ -19,10 +19,7 @@ namespace WithingsTest.Controllers
         {
             return View();
         }
-        //public static WithingsClient Create(string consumerKey, string consumerSecret)
-        //{
-        //    var client = OAuthUtility.CreateOAuthClient("consumerKey", "consumerSecret", new AccessToken("accessToken", "accessTokenSecret"));
-        //}
+       
 
         public async Task<ActionResult> RequestTokenFlow()
         {

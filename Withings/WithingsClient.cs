@@ -11,7 +11,7 @@ using Withings.API.Portable.OAuth1;
 
 namespace Withings.API.Portable
 {
-   public class WithingsClient : IWithingsClient
+   public class WithingsClient 
     {
         public WithingsAppCredentials AppCredentials { get; private set; }
 

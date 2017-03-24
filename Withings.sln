@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Withings.Portable.DebugSite
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable", "Portable", "{A145C958-740C-46C6-8D77-19146F3DFA51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithingsOAuth1SampleSite", "WithingsOAuth1SampleSite\WithingsOAuth1SampleSite.csproj", "{36395A6A-7F86-41CE-97C0-C2C8F1641ABF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithingsTest", "WithingsTest\WithingsTest.csproj", "{5C5DE17F-E034-4BE0-8B3B-6DCBD3DBFC13}"
 EndProject
 Global
@@ -33,10 +31,6 @@ Global
 		{D9F2F3FA-18FC-4FAD-A392-BF1B3E96731B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9F2F3FA-18FC-4FAD-A392-BF1B3E96731B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9F2F3FA-18FC-4FAD-A392-BF1B3E96731B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36395A6A-7F86-41CE-97C0-C2C8F1641ABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36395A6A-7F86-41CE-97C0-C2C8F1641ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36395A6A-7F86-41CE-97C0-C2C8F1641ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36395A6A-7F86-41CE-97C0-C2C8F1641ABF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C5DE17F-E034-4BE0-8B3B-6DCBD3DBFC13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C5DE17F-E034-4BE0-8B3B-6DCBD3DBFC13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C5DE17F-E034-4BE0-8B3B-6DCBD3DBFC13}.Release|Any CPU.ActiveCfg = Release|Any CPU
