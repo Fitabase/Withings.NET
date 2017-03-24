@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Withings.API.Portable.Constants" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAwAAAAAAIAAAAAAAAAAAAAAAAAAAgAAIAAAAAAAA=</HashCode>
+      <FileName>Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Withings.API.Portable.EmptyDateToMinDateConverter" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>EmptyDateToMinDateConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Withings.API.Portable.JsonDotNetSerializer" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAIBAAAAAAAAAAAAA=</HashCode>
+      <FileName>JsonDotNetSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Withings.API.Portable.WithingsAppCredentials" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>WithingsAppCredentials.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Withings.API.Portable.WithingsClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEgAAAAAAAAECIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WithingsClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Withings.Portable.Interceptors.WithingsHttpErrorHandler" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interceptors\WithingsHttpErrorHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Withings.API.Portable.Models.BloodPressure" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAIACAAAQA=</HashCode>
+      <FileName>Models\BloodPressure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Withings.API.Portable.Models.BloodPressureAverage" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAIACAAAAA=</HashCode>
+      <FileName>Models\BloodPressureAverage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Withings.API.Portable.Models.BloodPressureData" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\BloodPressureData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Withings.API.Portable.Models.Device" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAECAAAAAAgAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Device.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Withings.API.Portable.OAuth1.DefaultTokenManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OAuth1\DefaultTokenManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Withings.API.Portable.OAuth1.OAuth1Helper" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAgAAAABAAAQAAAAAAACAAAA=</HashCode>
+      <FileName>OAuth1\OAuth1Helper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Withings.API.Portable.OAuth1.OAuth1RequestToken" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAgAAAgAEAAAAAAAAAAAAAABAgA=</HashCode>
+      <FileName>OAuth1\OAuth1RequestToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Withings.API.Portable.IWithingsClient" Collapsed="true">
+    <Position X="2.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAIAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>IWithingsClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Withings.API.Portable.IWithingsInterceptor" Collapsed="true">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IWithingsInterceptor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Withings.API.Portable.OAuth1.ITokenManager" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OAuth1\ITokenManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Withings.API.Portable.Models.DeviceType" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\Owner\Source\Repos\Withings.NET\DeviceType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Withings.API.Portable.Models
 {
-    class BloodPressureAverage
+   public class BloodPressureAverage
     {
         public string Condition { get; set; }
         public int Diastolic { get; set; }
