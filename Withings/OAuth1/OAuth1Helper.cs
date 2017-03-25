@@ -16,7 +16,7 @@ namespace Withings.API.Portable.OAuth1
 
         private string RedirectUri;
         
-        public OAuth1Helper(WithingsAppCredentials credentials, string redirectUri)
+        public OAuth1Helper(WithingsAppAuthenticator credentials, string redirectUri)
         {
             this.ConsumerKey = credentials.ConsumerKey;
             this.ConsumerSecret = credentials.ConsumerSecret;

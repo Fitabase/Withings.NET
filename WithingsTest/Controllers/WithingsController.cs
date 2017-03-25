@@ -10,9 +10,9 @@ namespace WithingsTest.Controllers
 {
     public class WithingsController : Controller
     {
-        private string consumerSecret= "1f933dcc400ef51f63ffc40b8eeeb429cbbdc53198cf7c4249662c70f403b";
+        //private string consumerSecret= "1f933dcc400ef51f63ffc40b8eeeb429cbbdc53198cf7c4249662c70f403b";
         
-        private string consumerKey="8ecb6d91d1ee66d5c3696c0c803197ed9e8cdff332ff40d5f964430ce9d1";
+        //private string consumerKey="8ecb6d91d1ee66d5c3696c0c803197ed9e8cdff332ff40d5f964430ce9d1";
         
         // GET: Withings
         public ActionResult Index()

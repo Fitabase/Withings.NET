@@ -13,7 +13,7 @@ namespace Withings.API.Portable
 {
    public class WithingsClient 
     {
-        public WithingsAppCredentials AppCredentials { get; private set; }
+        public WithingsAppAuthenticator AppCredentials { get; private set; }
 
         private OAuth1RequestToken _requestToken;
 
