@@ -25,12 +25,12 @@ namespace WithingsTest.Controllers
         {
             //setting authorizer value to the keyvaluepair and IEnumberable key and secret
              
-            var authorizer = new OAuthAuthorizer(consumerKey, consumerSecret);
+            
 
             //Createing a KeyvaluePair for the callBack URL used in step one
 
-            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            parameters.Add(new KeyValuePair<string, string>("oauth_callback", Uri.EscapeUriString("http://localhost:49932/CallBack/AccessTokenFlow")));
+            //List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            //parameters.Add(new KeyValuePair<string, string>("oauth_callback", Uri.EscapeUriString("http://localhost:49932/CallBack/AccessTokenFlow")));
 
 
             // get request token - once url reads http://localhost:49932/Withings/RequestTokenFlow Controller begins with action result HERE
