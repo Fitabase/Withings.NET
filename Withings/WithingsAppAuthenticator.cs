@@ -50,12 +50,14 @@ namespace Withings.API.Portable
             //requestUrl buildAuthroizeUrl is putting together a callback url
             var requestUrl = authorizer.BuildAuthorizeUrl("https://oauth.withings.com/account/authorize", requestToken);
 
+
+            //not recognizing Toke property of AsyncOAuth Request token model "Obsolete"
             // return the request token
-            return new RequestToken
-            {
-                Token = requestToken.Key,
-                Secret = requestToken.Secret
-            };
+            //return new RequestToken
+            //{
+            //    Token = requestToken.Key,
+            //    Secret = requestToken.Secret
+            //};
         }
 
     }
