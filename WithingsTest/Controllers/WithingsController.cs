@@ -21,7 +21,7 @@ namespace WithingsTest.Controllers
         }
        
 
-        public async Task<ActionResult> RequestTokenFlow()
+        public async Task<ActionResult> GetRequestTokenAsync()
         {
             //setting authorizer value to the keyvaluepair and IEnumberable key and secret
              
@@ -35,29 +35,29 @@ namespace WithingsTest.Controllers
 
             // get request token - once url reads http://localhost:49932/Withings/RequestTokenFlow Controller begins with action result HERE
 
-            var tokenResponse = await authorizer.GetRequestToken("https://oauth.withings.com/account/request_token",parameters);
+            //var tokenResponse = await authorizer.GetRequestToken("https://oauth.withings.com/account/request_token",parameters);
             //Summary - Sends consumerKey and consumerSecret to withings oauth site with parameters of oauth callback valued above
 
             //setting value of the Token to the requestToken
 
 
-            var requestToken = tokenResponse.Token;
+           // var requestToken = tokenResponse.Token;
             //Oauth is hashed and decoded via AsynchOauth and stored as tokenReponse.Token in requestToken variable 
             //adding data to session
             //Store the products to a session
 
-            Session["requestToken"] = requestToken;
+            //Session["requestToken"] = requestToken;
 
          
 
             //requestUrl buildAuthroizeUrl is putting together a callback url
 
-            var requestUrl = authorizer.BuildAuthorizeUrl("https://oauth.withings.com/account/authorize", requestToken);
+           // var requestUrl = authorizer.BuildAuthorizeUrl("https://oauth.withings.com/account/authorize", requestToken);
             //creating a request url with consumerKey/Secret + withings oauth + tokenResponse.Token
 
             //Binding View to go to callback URL defined in first step
 
-            ViewBag.RequestUrl = requestUrl;
+            //ViewBag.RequestUrl = requestUrl;
         
     
         

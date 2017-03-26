@@ -46,6 +46,10 @@ namespace Withings.API.Portable
 
             var requestToken = tokenResponse.Token;
 
+
+            //requestUrl buildAuthroizeUrl is putting together a callback url
+            var requestUrl = authorizer.BuildAuthorizeUrl("https://oauth.withings.com/account/authorize", requestToken);
+
             // return the request token
             return new RequestToken
             {
