@@ -21,7 +21,7 @@ namespace WithingsTest.Controllers
         }
        
 
-        public async Task<ActionResult> GetRequestTokenAsync()
+        public ActionResult GetRequestTokenAsync()
         {
             //setting authorizer value to the keyvaluepair and IEnumberable key and secret
              
