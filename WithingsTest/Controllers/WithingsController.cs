@@ -43,20 +43,22 @@ namespace WithingsTest.Controllers
             return View();
         }
 
-        //public async Task<ActionResult> CallBack()
-        //{
-        //    //public async Task<ActionResult> RefreshToken()
-        //    // {
-        //    //     var fitbitClient = GetFitbitClient();
+        public async Task<ActionResult> CallBack()
+        {
+            //public async Task<ActionResult> RefreshToken()
+            // {
+            //     var fitbitClient = GetFitbitClient();
 
-        //    //     ViewBag.AccessToken = await fitbitClient.RefreshOAuth2Token();
+            //     ViewBag.AccessToken = await fitbitClient.RefreshOAuth2Token();
 
-        //    //     return View("Callback");
-        //    // 
-        //   WithingsAppCredentials appCredentials = (WithingsAppCredentials)Session["AppCredentials"];
-        //}
+            //     return View("Callback");
+            // 
+            WithingsAppCredentials appCredentials = (WithingsAppCredentials)Session["AppCredentials"];
+           RequestToken reqeustTokenResponse = await WithingsAppAuthenticator.GetRequestTokenAsync();
+            return ();
+        }
 
-    
+
 
 
     }
