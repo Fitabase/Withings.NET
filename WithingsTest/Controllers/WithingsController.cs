@@ -55,7 +55,7 @@ namespace WithingsTest.Controllers
             // 
             WithingsAppCredentials appCredentials = (WithingsAppCredentials)Session["AppCredentials"];
            RequestToken reqeustTokenResponse = await WithingsAppAuthenticator.GetRequestTokenAsync();
-            return ();
+            return View();
         }
 
 

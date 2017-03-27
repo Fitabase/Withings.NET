@@ -33,12 +33,6 @@ namespace Withings.API.Portable.OAuth1
         /// </summary>
         public DateTime UtcExpirationDate { get; set; }
 
-        public bool IsFresh()
-        {
-            if (DateTime.MinValue == UtcExpirationDate)
-                throw new InvalidOperationException(
-                    $"The {nameof(UtcExpirationDate)} property needs to be set before using this method.");
-            return DateTime.Compare(DateTime.UtcNow, UtcExpirationDate) < 0;
-        }
+        
     }
 }
