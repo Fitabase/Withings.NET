@@ -37,7 +37,7 @@ namespace WithingsTest.Controllers
 
             //Provide the App Credentials. You get those by registering your app at dev.fitbit.com
             //Configure Fitbit authenticaiton request to perform a callback to this constructor's Callback method
-            var authenticator = new OAuth1Helper(appCredentials, Request.Url.GetLeftPart);
+            var authenticator = new OAuth1Helper(appCredentials, "localhost//");
 
             return View();
         }

@@ -24,10 +24,13 @@ namespace Withings.API.Portable
         }
         
 
-        public string GenerateAuthUrlFromRequestToken(RequestToken token, bool forceLogoutBeforeAuth)
+        public string GenerateAuthUrlFromRequestToken(RequestToken requestToken)
         {
-            var url = Constants.BaseApiUrl + (forceLogoutBeforeAuth ? Constants.LogoutAndAuthorizeUri : Constants.AuthorizeUri);
-            return string.Format("{0}?oauth_token={1}", url, token.Token);
+            // create authorizer
+            var authorizer = new OAuthAuthorizer(ConsumerKey, ConsumerSecret);
+            //requestUrl buildAuthroizeUrl is putting together a callback url
+            var requestUrl = authorizer.BuildAuthorizeUrl("https://oauth.withings.com/account/authorize", requestToken);
+            return requestUrl;
         }
 
 
@@ -48,20 +51,12 @@ namespace Withings.API.Portable
 
             var requestToken = tokenResponse.Token;
 
-
-            //requestUrl buildAuthroizeUrl is putting together a callback url
-            var requestUrl = authorizer.BuildAuthorizeUrl("https://oauth.withings.com/account/authorize", requestToken);
-
-
             //not recognizing Toke property of AsyncOAuth Request token model "Obsolete"
             // return the request token
-            return new AsyncOAuth.RequestToken
-            {
-                Token = requestToken.Key,
-                Secret = requestToken.Secret
-            };
+            return requestToken;
 
         }
+
 
 
 
@@ -86,72 +81,73 @@ namespace Withings.API.Portable
         //    };
         //    return result;
         //}
-        public async Task<AccessToken> AccessTokenFlow()
+        public async Task<AccessToken> AccessTokenFlow(RequestToken requestToken, string oAuthVerifier)
         {
+        //passing in the MVC where AccessTokenFlow=string oatuhtokens
             //seting the authorizer varable with consumerKey/Secret as in Withings. Will become variable for later injection
             //grab value in URL to place in varables
 
             var authorizer = new OAuthAuthorizer(ConsumerKey, ConsumerSecret);
 
-            var accessToken = Request.QueryString["oauth_token"].ToString();
-            var oAuthVerifier = Request.QueryString["oauth_verifier"].ToString();
-            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            parameters.Add(new KeyValuePair<string, string>("oauth_token", accessToken));
-
-
+            //var accessToken = Request.QueryString["oauth_token"].ToString();
+            //var oAuthVerifier = Request.QueryString["oauth_verifier"].ToString();
+            //List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            //parameters.Add(new KeyValuePair<string, string>("oauth_token", oAuthToken));
 
             //  List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             //   parameters.Add(new KeyValuePair<string, string>("oauth_verifier", oAuthVerifier));
 
-            
+
 
             //send them out as access_tokens to get access granted by Withings 
             var accessTokenResponse = await authorizer.GetAccessToken("https://oauth.withings.com/account/access_token", requestToken, oAuthVerifier);
-            var accessTokens = accessTokenResponse.Token;
+            var accessToken = accessTokenResponse.Token;
+            return accessToken;
+        }
 
-            string userId = Request.QueryString["userid"]; //todo: Find out how to assign the real user id from OAuth call
+        //    string userId = Request.QueryString["userid"]; //todo: Find out how to assign the real user id from OAuth call
 
-            var result = new AuthCredential { userId = accessToken.ExtraData["encoded_user_id"].FirstOrDefault()};
+        //    var result = new AuthCredential { userId = accessToken.ExtraData["encoded_user_id"].FirstOrDefault()};
 
-            var client = OAuthUtility.CreateOAuthClient(ConsumerKey, ConsumerSecret, accessTokens);
-
-
-            //string withingsDateApiUrl = "&date=";
-
-            //string withingsStartDateApiUrl = "&startdateymd=";
-
-            //string withingsEndDateApiUrl = "&enddateymd=";
-            //DateTime date = DateTime.Now;
-            //string dateFormat = date.ToString("yyyy-MM-dd");
-            //string startDateFormat = "2017-03-10";
-
-            //string endDateFormat = "2017-03-21";
-
-            // string dateFormat = "2017-03-13";
-
-            //string oauthenticator = "&"+consumerSecret+"&"+accessToken;
-            var oAuth_params = OAuthUtility.BuildBasicParameters(ConsumerKey, ConsumerSecret, "https://wbsapi.withings.net", HttpMethod.Get, accessTokens)
-                .Where(p => p.Key != "oauth_signature")
-                .OrderBy(p => p.Key);
+        //    var client = OAuthUtility.CreateOAuthClient(ConsumerKey, ConsumerSecret, accessTokens);
 
 
-            string requestUri = $"https://wbsapi.withings.net/measure?action=getmeas&userid={userId}&";
+        //    //string withingsDateApiUrl = "&date=";
 
-            requestUri += string.Join("&", oAuth_params.Select(kvp => kvp.Key + "=" + kvp.Value));
+        //    //string withingsStartDateApiUrl = "&startdateymd=";
 
-            var signature = OAuthUtility.BuildBasicParameters(ConsumerKey, ConsumerSecret, requestUri, HttpMethod.Get, accessTokens)
-                .First(p => p.Key == "oauth_signature").Value;
+        //    //string withingsEndDateApiUrl = "&enddateymd=";
+        //    //DateTime date = DateTime.Now;
+        //    //string dateFormat = date.ToString("yyyy-MM-dd");
+        //    //string startDateFormat = "2017-03-10";
 
-            string json = await client.GetStringAsync(requestUri + "&oauth_signature=" + signature);
+        //    //string endDateFormat = "2017-03-21";
 
-            var o = JObject.Parse(json);
+        //    // string dateFormat = "2017-03-13";
 
-            int updateTime = (int)o["body"]["updatetime"];
+        //    //string oauthenticator = "&"+consumerSecret+"&"+accessToken;
+        //    var oAuth_params = OAuthUtility.BuildBasicParameters(ConsumerKey, ConsumerSecret, "https://wbsapi.withings.net", HttpMethod.Get, accessTokens)
+        //        .Where(p => p.Key != "oauth_signature")
+        //        .OrderBy(p => p.Key);
+
+
+        //    string requestUri = $"https://wbsapi.withings.net/measure?action=getmeas&userid={userId}&";
+
+        //    requestUri += string.Join("&", oAuth_params.Select(kvp => kvp.Key + "=" + kvp.Value));
+
+        //    var signature = OAuthUtility.BuildBasicParameters(ConsumerKey, ConsumerSecret, requestUri, HttpMethod.Get, accessTokens)
+        //        .First(p => p.Key == "oauth_signature").Value;
+
+        //    string json = await client.GetStringAsync(requestUri + "&oauth_signature=" + signature);
+
+        //    var o = JObject.Parse(json);
+
+        //    int updateTime = (int)o["body"]["updatetime"];
 
            
 
-            return (o);
+        //    return (o);
 
-        }
+        
     }
 }
