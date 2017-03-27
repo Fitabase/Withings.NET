@@ -40,11 +40,11 @@ namespace Withings.API.Portable
             var authorizer = new OAuthAuthorizer(ConsumerKey, ConsumerSecret);
 
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            parameters.Add(new KeyValuePair<string, string>("oauth_callback", Uri.EscapeUriString("http://localhost:49932/CallBack/AccessTokenFlow")));
+            parameters.Add(new KeyValuePair<string, string>("oauth_callback", Uri.EscapeUriString("http://localhost:49932/Withings/CallBack")));
 
-            // get request token - once url reads http://localhost:49932/Withings/RequestTokenFlow Controller begins with action result HERE
+            // get request token - once url reads http://localhost:49932/Withings/CallBack Controller begins with action result HERE
             // get request token
-      
+
             //Summary - Sends consumerKey and consumerSecret to withings oauth site with parameters of oauth callback valued above
 
             var tokenResponse = await authorizer.GetRequestToken(Constants.BaseApiUrl + Constants.TemporaryCredentialsRequestTokenUri, parameters);

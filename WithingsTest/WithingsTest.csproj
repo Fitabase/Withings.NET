@@ -185,6 +185,7 @@
     <Content Include="Views\Withings\Index.cshtml" />
     <Content Include="Views\Withings\RequestTokenFlow.cshtml" />
     <Content Include="Views\Withings\Authorize.cshtml" />
+    <Content Include="Views\Withings\CallBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

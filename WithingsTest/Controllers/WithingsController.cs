@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Withings.API.Portable;
 using Withings.API.Portable.OAuth1;
 
+
 namespace WithingsTest.Controllers
 {
     public class WithingsController : Controller
@@ -37,9 +38,26 @@ namespace WithingsTest.Controllers
 
             //Provide the App Credentials. You get those by registering your app at dev.fitbit.com
             //Configure Fitbit authenticaiton request to perform a callback to this constructor's Callback method
-            var authenticator = new OAuth1Helper(appCredentials, "localhost//");
-
+            var authenticator = new OAuth1Helper(appCredentials, "http://localhost:49932/Withings/Authorize");
+            ViewBag.Response = appCredentials;
             return View();
         }
-   }
+
+        //public async Task<ActionResult> CallBack()
+        //{
+        //    //public async Task<ActionResult> RefreshToken()
+        //    // {
+        //    //     var fitbitClient = GetFitbitClient();
+
+        //    //     ViewBag.AccessToken = await fitbitClient.RefreshOAuth2Token();
+
+        //    //     return View("Callback");
+        //    // 
+        //   WithingsAppCredentials appCredentials = (WithingsAppCredentials)Session["AppCredentials"];
+        //}
+
+    
+
+
+    }
 }
