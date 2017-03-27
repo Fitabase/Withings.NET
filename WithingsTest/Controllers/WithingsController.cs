@@ -1,10 +1,13 @@
 ﻿using AsyncOAuth;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Withings.API.Portable;
+using Withings.API.Portable.OAuth1;
 
 namespace WithingsTest.Controllers
 {
@@ -21,46 +24,21 @@ namespace WithingsTest.Controllers
         }
        
 
-        public ActionResult GetRequestTokenAsync()
+        public ActionResult Authorize()
         {
-            //setting authorizer value to the keyvaluepair and IEnumberable key and secret
-             
-            
+            var appCredentials = new WithingsAppCredentials()
+            {
+                ConsumerKey = ConfigurationManager.AppSettings["WithingsConsumerKey"],
+                ConsumerSecret = ConfigurationManager.AppSettings["WithingsConsumerSecret"]
+            };
+            //make sure you've set these up in Web.Config under <appSettings>:
 
-            //Createing a KeyvaluePair for the callBack URL used in step one
+            Session["AppCredentials"] = appCredentials;
 
-            //List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            //parameters.Add(new KeyValuePair<string, string>("oauth_callback", Uri.EscapeUriString("http://localhost:49932/CallBack/AccessTokenFlow")));
+            //Provide the App Credentials. You get those by registering your app at dev.fitbit.com
+            //Configure Fitbit authenticaiton request to perform a callback to this constructor's Callback method
+            var authenticator = new OAuth1Helper(appCredentials, Request.Url.GetLeftPart);
 
-
-            // get request token - once url reads http://localhost:49932/Withings/RequestTokenFlow Controller begins with action result HERE
-
-            //var tokenResponse = await authorizer.GetRequestToken("https://oauth.withings.com/account/request_token",parameters);
-            //Summary - Sends consumerKey and consumerSecret to withings oauth site with parameters of oauth callback valued above
-
-            //setting value of the Token to the requestToken
-
-
-           // var requestToken = tokenResponse.Token;
-            //Oauth is hashed and decoded via AsynchOauth and stored as tokenReponse.Token in requestToken variable 
-            //adding data to session
-            //Store the products to a session
-
-            //Session["requestToken"] = requestToken;
-
-         
-
-            //requestUrl buildAuthroizeUrl is putting together a callback url
-
-           // var requestUrl = authorizer.BuildAuthorizeUrl("https://oauth.withings.com/account/authorize", requestToken);
-            //creating a request url with consumerKey/Secret + withings oauth + tokenResponse.Token
-
-            //Binding View to go to callback URL defined in first step
-
-            //ViewBag.RequestUrl = requestUrl;
-        
-    
-        
             return View();
         }
    }
