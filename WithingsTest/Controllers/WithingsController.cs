@@ -38,28 +38,21 @@ namespace WithingsTest.Controllers
 
             //Provide the App Credentials. You get those by registering your app at dev.fitbit.com
             //Configure Fitbit authenticaiton request to perform a callback to this constructor's Callback method
-            var authenticator = new OAuth1Helper(appCredentials, "http://localhost:49932/Withings/Authorize");
+         
             ViewBag.Response = appCredentials;
             return View();
         }
 
         public async Task<ActionResult> CallBack()
         {
-            //public async Task<ActionResult> RefreshToken()
-            // {
-            //     var fitbitClient = GetFitbitClient();
 
-            //     ViewBag.AccessToken = await fitbitClient.RefreshOAuth2Token();
-
-            //     return View("Callback");
-            // 
             WithingsAppCredentials appCredentials = (WithingsAppCredentials)Session["AppCredentials"];
-           RequestToken reqeustTokenResponse = await WithingsAppAuthenticator.GetRequestTokenAsync();
-            return View();
+
+
+            var withingsAppConstructor = new WithingsAppAuthenticator((WithingsAppCredentials)Session["AppCredentials"]);
+
+           RequestToken requestTokenResponse = await withingsAppConstructor.GetRequestTokenAsync();
+           return View();
         }
-
-
-
-
     }
 }

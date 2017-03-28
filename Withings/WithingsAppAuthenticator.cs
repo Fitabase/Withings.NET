@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+using Withings.API.Portable.OAuth1;
 
 namespace Withings.API.Portable
 
@@ -17,10 +17,11 @@ namespace Withings.API.Portable
         public string ConsumerKey { get; set; }
         public string ConsumerSecret { get; set; }
 
-        public WithingsAppAuthenticator (string consumerKey, string consumerSecret)
+        //Constructor
+        public WithingsAppAuthenticator (WithingsAppCredentials appCredentials)
         {
-            consumerKey = ConsumerKey;
-            consumerSecret = ConsumerSecret;
+            ConsumerKey = appCredentials.ConsumerKey;
+            ConsumerSecret = appCredentials.ConsumerSecret;
         }
         
 
@@ -44,14 +45,14 @@ namespace Withings.API.Portable
 
             // get request token - once url reads http://localhost:49932/Withings/CallBack Controller begins with action result HERE
             // get request token
-
+           
             //Summary - Sends consumerKey and consumerSecret to withings oauth site with parameters of oauth callback valued above
 
             var tokenResponse = await authorizer.GetRequestToken(Constants.BaseApiUrl + Constants.TemporaryCredentialsRequestTokenUri, parameters);
 
             var requestToken = tokenResponse.Token;
 
-            //not recognizing Toke property of AsyncOAuth Request token model "Obsolete"
+            
             // return the request token
             return requestToken;
 
