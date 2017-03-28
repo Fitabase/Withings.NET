@@ -53,10 +53,46 @@ namespace WithingsTest.Controllers
 
            RequestToken requestTokenResponse = await withingsAppConstructor.GetRequestTokenAsync();
             ViewBag.displayRequest = requestTokenResponse;
-           
-           return View();
-        }
 
+            Session["requestToken"] = requestTokenResponse;
+
+            var redirectUrl = withingsAppConstructor.GenerateAuthUrlFromRequestToken(requestTokenResponse);
+
+            ViewBag.RedirectUrl = redirectUrl;
+            ViewBag.RedirectUrl.ToString();
+
+            // "~/View/Withings/CallBack.aspx"
+       
+            
+            return View();
+        }
         
+        public async Task<ActionResult> AccessTokenFlow()
+        {
+            //var accessToken = Request.QueryString["oauth_token"].ToString();
+
+            //List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            //parameters.Add(new KeyValuePair<string, string>("oauth_token", accessToken));
+
+            var appCredentials = new WithingsAppCredentials()
+            {
+                ConsumerKey = ConfigurationManager.AppSettings["WithingsConsumerKey"],
+                ConsumerSecret = ConfigurationManager.AppSettings["WithingsConsumerSecret"]
+            };
+
+            Session["AppCredentials"] = appCredentials;
+
+            var oAuthVerifier = Request.QueryString["oauth_verifier"].ToString();
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("oauth_verifier", oAuthVerifier));
+
+            var withingsAppConstructor = new WithingsAppAuthenticator((WithingsAppCredentials)Session["AppCredentials"]);
+            var requestTokenSession = Session["requestToken"] as RequestToken;
+
+
+            AccessToken accessTokenResponse = await withingsAppConstructor.AccessTokenFlow(requestTokenSession, oAuthVerifier);
+
+            return View("AccessTokenFlow");
+        }
     }
 }

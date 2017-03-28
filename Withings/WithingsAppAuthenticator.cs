@@ -41,7 +41,7 @@ namespace Withings.API.Portable
             var authorizer = new OAuthAuthorizer(ConsumerKey, ConsumerSecret);
 
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            parameters.Add(new KeyValuePair<string, string>("oauth_callback", Uri.EscapeUriString("http://localhost:49932/Withings/CallBack")));
+            parameters.Add(new KeyValuePair<string, string>("oauth_callback", Uri.EscapeUriString("http://localhost:49932/Withings/AccessTokenFlow")));
 
             // get request token - once url reads http://localhost:49932/Withings/CallBack Controller begins with action result HERE
             // get request token
@@ -58,9 +58,7 @@ namespace Withings.API.Portable
 
         }
 
-
-
-
+    
 
         //public async Task<AuthCredential> ProcessApprovedAuthCallbackAsync(RequestToken token)
         //{
@@ -90,18 +88,11 @@ namespace Withings.API.Portable
 
             var authorizer = new OAuthAuthorizer(ConsumerKey, ConsumerSecret);
 
-            //var accessToken = Request.QueryString["oauth_token"].ToString();
-            //var oAuthVerifier = Request.QueryString["oauth_verifier"].ToString();
-            //List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            //parameters.Add(new KeyValuePair<string, string>("oauth_token", oAuthToken));
-
-            //  List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            //   parameters.Add(new KeyValuePair<string, string>("oauth_verifier", oAuthVerifier));
-
+            
 
 
             //send them out as access_tokens to get access granted by Withings 
-            var accessTokenResponse = await authorizer.GetAccessToken("https://oauth.withings.com/account/access_token", requestToken, oAuthVerifier);
+           var accessTokenResponse = await authorizer.GetAccessToken(Constants.BaseApiUrl + Constants.TemporaryCredentialsAccessTokenUri, requestToken, oAuthVerifier);
             var accessToken = accessTokenResponse.Token;
             return accessToken;
         }
