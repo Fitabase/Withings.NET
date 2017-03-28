@@ -8,7 +8,7 @@ namespace Withings.API.Portable
 {
     internal class Constants
     {
-        public const string BaseApiUrl = "https://oauth.withings.com/";
+        public const string BaseApiUrl = "https://oauth.withings.com/account/";
         public const string TemporaryCredentialsRequestTokenUri = "request_token";
         public const string TemporaryCredentialsAccessTokenUri = "access_token";
         public const string AuthorizeUri = "authorize";

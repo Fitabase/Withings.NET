@@ -52,7 +52,11 @@ namespace WithingsTest.Controllers
             var withingsAppConstructor = new WithingsAppAuthenticator((WithingsAppCredentials)Session["AppCredentials"]);
 
            RequestToken requestTokenResponse = await withingsAppConstructor.GetRequestTokenAsync();
+            ViewBag.displayRequest = requestTokenResponse;
+           
            return View();
         }
+
+        
     }
 }
