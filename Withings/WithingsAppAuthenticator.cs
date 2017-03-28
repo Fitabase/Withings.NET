@@ -97,49 +97,7 @@ namespace Withings.API.Portable
             return accessToken;
         }
 
-        //    string userId = Request.QueryString["userid"]; //todo: Find out how to assign the real user id from OAuth call
-
-        //    var result = new AuthCredential { userId = accessToken.ExtraData["encoded_user_id"].FirstOrDefault()};
-
-        //    var client = OAuthUtility.CreateOAuthClient(ConsumerKey, ConsumerSecret, accessTokens);
-
-
-        //    //string withingsDateApiUrl = "&date=";
-
-        //    //string withingsStartDateApiUrl = "&startdateymd=";
-
-        //    //string withingsEndDateApiUrl = "&enddateymd=";
-        //    //DateTime date = DateTime.Now;
-        //    //string dateFormat = date.ToString("yyyy-MM-dd");
-        //    //string startDateFormat = "2017-03-10";
-
-        //    //string endDateFormat = "2017-03-21";
-
-        //    // string dateFormat = "2017-03-13";
-
-        //    //string oauthenticator = "&"+consumerSecret+"&"+accessToken;
-        //    var oAuth_params = OAuthUtility.BuildBasicParameters(ConsumerKey, ConsumerSecret, "https://wbsapi.withings.net", HttpMethod.Get, accessTokens)
-        //        .Where(p => p.Key != "oauth_signature")
-        //        .OrderBy(p => p.Key);
-
-
-        //    string requestUri = $"https://wbsapi.withings.net/measure?action=getmeas&userid={userId}&";
-
-        //    requestUri += string.Join("&", oAuth_params.Select(kvp => kvp.Key + "=" + kvp.Value));
-
-        //    var signature = OAuthUtility.BuildBasicParameters(ConsumerKey, ConsumerSecret, requestUri, HttpMethod.Get, accessTokens)
-        //        .First(p => p.Key == "oauth_signature").Value;
-
-        //    string json = await client.GetStringAsync(requestUri + "&oauth_signature=" + signature);
-
-        //    var o = JObject.Parse(json);
-
-        //    int updateTime = (int)o["body"]["updatetime"];
-
-           
-
-        //    return (o);
-
+       
         
     }
 }
