@@ -47,8 +47,6 @@
     <Compile Include="..\DeviceType.cs">
       <Link>Models\DeviceType.cs</Link>
     </Compile>
-    <Compile Include="OAuth1\OAuth1AccessToken.cs" />
-    <Compile Include="OAuth1\OAuth1RequestToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WithingsAppAuthenticator.cs" />
     <Compile Include="WithingsAppCredentials.cs" />

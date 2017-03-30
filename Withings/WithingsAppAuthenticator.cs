@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Withings.API.Portable.OAuth1;
 
 namespace Withings.API.Portable
 
@@ -94,6 +93,12 @@ namespace Withings.API.Portable
             //send them out as access_tokens to get access granted by Withings 
            var accessTokenResponse = await authorizer.GetAccessToken(Constants.BaseApiUrl + Constants.TemporaryCredentialsAccessTokenUri, requestToken, oAuthVerifier);
             var accessToken = accessTokenResponse.Token;
+            //var result = new AuthCredential
+            //{
+            //    AuthToken = accessToken.Token.Key,
+            //    AuthTokenSecret = accessToken.Token.Secret,
+            //    UserId = accessToken.ExtraData["encoded_user_id"].FirstOrDefault()
+            //};
             return accessToken;
         }
 

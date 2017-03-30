@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Withings.API.Portable;
-using Withings.API.Portable.OAuth1;
 
 
 namespace WithingsTest.Controllers
@@ -55,7 +54,7 @@ namespace WithingsTest.Controllers
             ViewBag.displayRequest = requestTokenResponse;
 
             Session["requestToken"] = requestTokenResponse;
-
+            //Will appear as a link on the webpage after requestToken is passed
             var redirectUrl = withingsAppConstructor.GenerateAuthUrlFromRequestToken(requestTokenResponse);
 
             ViewBag.RedirectUrl = redirectUrl;
@@ -79,20 +78,45 @@ namespace WithingsTest.Controllers
                 ConsumerKey = ConfigurationManager.AppSettings["WithingsConsumerKey"],
                 ConsumerSecret = ConfigurationManager.AppSettings["WithingsConsumerSecret"]
             };
-
+            //saving consumerKey and Secret into session 
             Session["AppCredentials"] = appCredentials;
 
+            //oAuthVerifier taken from url to string to be made into a Key Value pair
             var oAuthVerifier = Request.QueryString["oauth_verifier"].ToString();
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("oauth_verifier", oAuthVerifier));
 
+            //Using AppCredentials in session into instanticiating WithingsAppAUthenticator
             var withingsAppConstructor = new WithingsAppAuthenticator((WithingsAppCredentials)Session["AppCredentials"]);
+
+            //Calling request token from previous method to inject into new AccessToken Call
             var requestTokenSession = Session["requestToken"] as RequestToken;
-
-
+            
+            //Awaiting Method from WithingsAppAuthenticator Class to return 
             AccessToken accessTokenResponse = await withingsAppConstructor.AccessTokenFlow(requestTokenSession, oAuthVerifier);
-
+      
+          
             return View("AccessTokenFlow");
+        }
+
+        public async Task<ActionResult> GetWithingsClient(AccessToken accessToken, DateTime currentDate)
+        {
+            var appCredentials = new WithingsAppCredentials()
+            {
+                ConsumerKey = ConfigurationManager.AppSettings["WithingsConsumerKey"],
+                ConsumerSecret = ConfigurationManager.AppSettings["WithingsConsumerSecret"]
+            };
+            string userId = Request.QueryString["userid"];
+            Session["UserId"] = userId;
+          
+            WithingsClient client = new WithingsClient(appCredentials,accessToken);
+
+            //client = OAuthUtility.CreateOAuthClient(appCredentials, accessToken);
+
+            var response = await client.GetDayActivityAsync(currentDate,userId);
+
+            return View();
+
         }
     }
 }

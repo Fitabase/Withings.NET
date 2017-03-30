@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Withings.API.Portable.Models
 {
-    class Activity
+    public class Activity
     {
+       public int UserId { get; set; }
        public DateTime Date { get; set; }
        public string TimeZone { get; set; } 
        public int Steps { get; set; }
@@ -19,6 +20,7 @@ namespace Withings.API.Portable.Models
        public int Moderate { get; set; }
        public int Intense { get; set; }
        public string Status { get; set; }
+
        
     }
 }

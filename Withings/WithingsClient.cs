@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Withings.API.Portable.Models;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Withings.API.Portable;
-using Withings.API.Portable.OAuth1;
-
+using AsyncOAuth;
+using Newtonsoft.Json.Linq;
 
 namespace Withings.API.Portable
 {
@@ -15,9 +15,9 @@ namespace Withings.API.Portable
     {
         public WithingsAppCredentials AppCredentials { get; private set; }
 
-        private OAuth1AccessToken _accessToken;
+        private AccessToken _accessToken;
 
-        public OAuth1AccessToken AccessToken
+        public AccessToken AccessToken
         {
             get
             {
@@ -37,36 +37,18 @@ namespace Withings.API.Portable
         /// </summary>
         public HttpClient HttpClient { get; private set; }
 
-        public WithingsClient(WithingsAppCredentials credentials, OAuth1AccessToken accessToken)
+        public WithingsClient(WithingsAppCredentials credentials, AccessToken accessToken)
         {
             this.AppCredentials = credentials;
             this.AccessToken = accessToken;
         }
 
-        public async Task<Activity>GetDayActivityAsync(DateTime activityDate, string encodedUserId)
+        public async Task<Activity>GetDayActivityAsync(DateTime activityDate, string userId)
         {
-            string userId = Request.QueryString["userid"]; //todo: Find out how to assign the real user id from OAuth call
-
-            var result = new AuthCredential { userId = accessToken.ExtraData["encoded_user_id"].FirstOrDefault() };
-
-            var client = OAuthUtility.CreateOAuthClient(AppCredentials, AccessToken);
+            var appCredentials = AppCredentials.ToString();
 
 
-            //string withingsDateApiUrl = "&date=";
-
-            //string withingsStartDateApiUrl = "&startdateymd=";
-
-            //string withingsEndDateApiUrl = "&enddateymd=";
-            //DateTime date = DateTime.Now;
-            //string dateFormat = date.ToString("yyyy-MM-dd");
-            //string startDateFormat = "2017-03-10";
-
-            //string endDateFormat = "2017-03-21";
-
-            // string dateFormat = "2017-03-13";
-
-            //string oauthenticator = "&"+consumerSecret+"&"+accessToken;
-            var oAuth_params = OAuthUtility.BuildBasicParameters(ConsumerKey, ConsumerSecret, "https://wbsapi.withings.net", HttpMethod.Get, accessTokens)
+            var oAuth_params = OAuthUtility.BuildBasicParameters(AppCredentials.ConsumerKey, AppCredentials.ConsumerSecret, "https://wbsapi.withings.net", HttpMethod.Get, this.AccessToken)
                 .Where(p => p.Key != "oauth_signature")
                 .OrderBy(p => p.Key);
 
@@ -75,10 +57,10 @@ namespace Withings.API.Portable
 
             requestUri += string.Join("&", oAuth_params.Select(kvp => kvp.Key + "=" + kvp.Value));
 
-            var signature = OAuthUtility.BuildBasicParameters(ConsumerKey, ConsumerSecret, requestUri, HttpMethod.Get, accessTokens)
-                .First(p => p.Key == "oauth_signature").Value;
+            var signature = OAuthUtility.BuildBasicParameters(AppCredentials.ConsumerKey, AppCredentials.ConsumerSecret, requestUri, HttpMethod.Get, this.AccessToken)
+                .First((KeyValuePair<string, string> p) => p.Key == "oauth_signature").Value;
 
-            string json = await client.GetStringAsync(requestUri + "&oauth_signature=" + signature);
+            string json = await HttpClient.GetStringAsync(requestUri + "&oauth_signature=" + signature);
 
             var o = JObject.Parse(json);
 
@@ -86,11 +68,40 @@ namespace Withings.API.Portable
 
 
 
-            return (o);
+            return (new Activity
+            {
+                UserId = (int)o["body"]["userid"],
+                Calories = (float)o["body"]["calories"],
+                Date = (DateTime)o["body"]["date"],
+                Distance = (float)o["body"]["distance"],
+                Elevation = (float)o["body"]["elevation"],
+                Intense = (int)o["body"]["intese"],
+                Moderate = (int)o["body"]["moderate"],
+                Soft = (int)o["body"]["soft"],
+                Status = (string)o["body"]["status"],
+                Steps = (int)o["body"]["steps"],
+                TimeZone = (string)o["body"]["timezone"],
+                TotalCalories = (float)o["body"]["totalcalories"] 
+
+
+            });
 
 
         }
+        //string withingsDateApiUrl = "&date=";
 
+        //string withingsStartDateApiUrl = "&startdateymd=";
+
+        //string withingsEndDateApiUrl = "&enddateymd=";
+        //DateTime date = DateTime.Now;
+        //string dateFormat = date.ToString("yyyy-MM-dd");
+        //string startDateFormat = "2017-03-10";
+
+        //string endDateFormat = "2017-03-21";
+
+        // string dateFormat = "2017-03-13";
+
+        //string oauthenticator = "&"+consumerSecret+"&"+accessToken;
     }
 }
 
