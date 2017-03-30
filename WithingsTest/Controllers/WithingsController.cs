@@ -128,7 +128,7 @@ namespace WithingsTest.Controllers
 
         }
 
-        public async Task<ActionResult> GetWithingsBodyMeas(string userid, string devType, string measType)
+        public async Task<ActionResult> GetWithingsBodyMeas(string userid, string devType)
         {
             var accessToken = Session["accessToken"] as AccessToken;
             var appCredentials = new WithingsAppCredentials()
@@ -138,14 +138,16 @@ namespace WithingsTest.Controllers
             };
 
             var userId = Session["UserId"].ToString();
+            var deviceType = "4";
+          
 
             WithingsClient client = new WithingsClient(appCredentials, accessToken);
 
-            var response = await client.GetBodyMeasureAsync(userId, device, measure);
+            var response = await client.GetBodyMeasureAsync(userId, deviceType);
 
             ViewBag.ResponseData = response;
 
-            return View("GetWithingsClient");
+            return View("GetWithingsBodyMeas");
 
         }
     }

@@ -65,7 +65,7 @@ namespace Withings.API.Portable
 
             string startdate = ("2017-02-30");
 
-            string requestUri = $"https://wbsapi.withings.net/v2/measure?action=getactivity&userid={userId}&startdate={startdate}&enddate={date}&";
+            string requestUri = $"https://wbsapi.withings.net/v2/measure?action=getactivity&userid={userId}&date={date}&";
 
             requestUri += string.Join("&", oAuth_params.Select(kvp => kvp.Key + "=" + kvp.Value));
 
@@ -93,7 +93,7 @@ namespace Withings.API.Portable
             });
 
         }
-        public async Task<IEnumerable<MeasureGroup>> GetBodyMeasureAsync(string deviceType, string measureType, string userId)
+        public async Task<IEnumerable<MeasureGroup>> GetBodyMeasureAsync(string userId, string deviceType)
         {
             var appCredentials = AppCredentials.ToString();
 
@@ -101,9 +101,9 @@ namespace Withings.API.Portable
             var oAuth_params = OAuthUtility.BuildBasicParameters(AppCredentials.ConsumerKey, AppCredentials.ConsumerSecret, "https://wbsapi.withings.net", HttpMethod.Get, this.AccessToken)
                 .Where(p => p.Key != "oauth_signature")
                 .OrderBy(p => p.Key);
-            string startdate =("2017-02-30");
+            
 
-            string requestUri = $"https://wbsapi.withings.net/v2/measure?action=getmeas&userid={userId}&devtype={deviceType}&meastype={measureType}&";
+            string requestUri = $"https://wbsapi.withings.net/measure?action=getmeas&userid={userId}&devtype={deviceType}&";
 
             requestUri += string.Join("&", oAuth_params.Select(kvp => kvp.Key + "=" + kvp.Value));
 
