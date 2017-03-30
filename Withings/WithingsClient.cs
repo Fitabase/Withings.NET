@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Withings.API.Portable;
 using AsyncOAuth;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Withings.API.Portable
 {
@@ -33,12 +34,19 @@ namespace Withings.API.Portable
             }
         }
 
-       
 
+
+        private HttpClient _httpClient;
         /// <summary>
         /// The httpclient which will be used for the api calls through the FitbitClient instance
         /// </summary>
-        public HttpClient HttpClient { get; private set; }
+        public HttpClient HttpClient
+        {
+            get
+            {
+                return _httpClient ?? (_httpClient = new HttpClient());
+            }
+        }
 
         public WithingsClient(WithingsAppCredentials credentials, AccessToken accessToken)
         {
@@ -55,8 +63,9 @@ namespace Withings.API.Portable
                 .Where(p => p.Key != "oauth_signature")
                 .OrderBy(p => p.Key);
 
+            string startdate = ("2017-02-30");
 
-            string requestUri = $"https://wbsapi.withings.net/measure?action=getmeas&userid={userId}&date={date}";
+            string requestUri = $"https://wbsapi.withings.net/v2/measure?action=getactivity&userid={userId}&startdate={startdate}&enddate={date}&";
 
             requestUri += string.Join("&", oAuth_params.Select(kvp => kvp.Key + "=" + kvp.Value));
 
@@ -67,31 +76,47 @@ namespace Withings.API.Portable
 
             var o = JObject.Parse(json);
 
-            int updateTime = (int)o["body"]["updatetime"];
-
-
-
+           
             return (new Activity
             {
-                UserId = (int)o["body"]["userid"],
+                   
                 Calories = (float)o["body"]["calories"],
                 Date = (string)o["body"]["date"],
                 Distance = (float)o["body"]["distance"],
                 Elevation = (float)o["body"]["elevation"],
-                Intense = (int)o["body"]["intese"],
+                Intense = (int)o["body"]["intense"],
                 Moderate = (int)o["body"]["moderate"],
                 Soft = (int)o["body"]["soft"],
-                Status = (string)o["body"]["status"],
                 Steps = (int)o["body"]["steps"],
                 TimeZone = (string)o["body"]["timezone"],
                 TotalCalories = (float)o["body"]["totalcalories"]
-
-
             });
 
-
         }
-       
+        public async Task<IEnumerable<MeasureGroup>> GetBodyMeasureAsync(string deviceType, string measureType, string userId)
+        {
+            var appCredentials = AppCredentials.ToString();
+
+
+            var oAuth_params = OAuthUtility.BuildBasicParameters(AppCredentials.ConsumerKey, AppCredentials.ConsumerSecret, "https://wbsapi.withings.net", HttpMethod.Get, this.AccessToken)
+                .Where(p => p.Key != "oauth_signature")
+                .OrderBy(p => p.Key);
+            string startdate =("2017-02-30");
+
+            string requestUri = $"https://wbsapi.withings.net/v2/measure?action=getmeas&userid={userId}&devtype={deviceType}&meastype={measureType}&";
+
+            requestUri += string.Join("&", oAuth_params.Select(kvp => kvp.Key + "=" + kvp.Value));
+
+            var signature = OAuthUtility.BuildBasicParameters(AppCredentials.ConsumerKey, AppCredentials.ConsumerSecret, requestUri, HttpMethod.Get, this.AccessToken)
+                .First((KeyValuePair<string, string> p) => p.Key == "oauth_signature").Value;
+
+            string json = await HttpClient.GetStringAsync(requestUri + "&oauth_signature=" + signature);
+
+            var o = JObject.Parse(json);
+
+            return JsonConvert.DeserializeObject<IEnumerable<MeasureGroup>>(o["body"]["measuregrps"].ToString());
+           
+        }
 
         //string withingsStartDateApiUrl = "&startdateymd=";
 

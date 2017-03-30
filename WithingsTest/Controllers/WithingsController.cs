@@ -99,19 +99,13 @@ namespace WithingsTest.Controllers
 
             string userId = Request.QueryString["userid"];
             Session["UserId"] = userId;
-
-           
-
+            
             WithingsClient client = new WithingsClient(appCredentials, accessTokenResponse);
-
-
-            string date = DateTime.Now.ToString("yyyy-MM-dd"); 
-            var redirect = GetWithingsClient(date,userId);
-            ViewBag.GetClientData = redirect; 
+           
             return View("AccessTokenFlow");
         }
 
-        public async Task<ActionResult> GetWithingsClient(string userid, string currentDate)
+        public async Task<ActionResult> GetWithingsClient(string currentDate,string userid)
         {
             var accessToken = Session["accessToken"] as AccessToken;
             var appCredentials = new WithingsAppCredentials()
@@ -122,11 +116,36 @@ namespace WithingsTest.Controllers
             
             var userId = Session["UserId"].ToString();
 
+            string date = DateTime.Now.ToString("yyyy-MM-dd");
+
             WithingsClient client = new WithingsClient(appCredentials,accessToken);
 
-            var response = await client.GetDayActivityAsync(currentDate,userId);
+            var response = await client.GetDayActivityAsync(date,userId);
 
-            return View("AccessTokenFlow");
+            ViewBag.ResponseData = response;
+
+            return View("GetWithingsClient");
+
+        }
+
+        public async Task<ActionResult> GetWithingsBodyMeas(string userid, string devType, string measType)
+        {
+            var accessToken = Session["accessToken"] as AccessToken;
+            var appCredentials = new WithingsAppCredentials()
+            {
+                ConsumerKey = ConfigurationManager.AppSettings["WithingsConsumerKey"],
+                ConsumerSecret = ConfigurationManager.AppSettings["WithingsConsumerSecret"]
+            };
+
+            var userId = Session["UserId"].ToString();
+
+            WithingsClient client = new WithingsClient(appCredentials, accessToken);
+
+            var response = await client.GetBodyMeasureAsync(userId, device, measure);
+
+            ViewBag.ResponseData = response;
+
+            return View("GetWithingsClient");
 
         }
     }

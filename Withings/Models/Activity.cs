@@ -18,9 +18,6 @@ namespace Withings.API.Portable.Models
        public float Elevation { get; set; }
        public float Soft { get; set; }
        public int Moderate { get; set; }
-       public int Intense { get; set; }
-       public string Status { get; set; }
-
-       
+       public int Intense { get; set; }       
     }
 }

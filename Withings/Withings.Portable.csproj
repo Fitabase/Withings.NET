@@ -40,13 +40,8 @@
     <Compile Include="Interceptors\WithingsHttpErrorHandler.cs" />
     <Compile Include="JsonDotNetSerializer.cs" />
     <Compile Include="Models\Activity.cs" />
-    <Compile Include="Models\BloodPressure.cs" />
-    <Compile Include="Models\BloodPressureAverage.cs" />
-    <Compile Include="Models\BloodPressureData.cs" />
-    <Compile Include="Models\Device.cs" />
-    <Compile Include="..\DeviceType.cs">
-      <Link>Models\DeviceType.cs</Link>
-    </Compile>
+    <Compile Include="Models\Measure.cs" />
+    <Compile Include="Models\MeasureGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WithingsAppAuthenticator.cs" />
     <Compile Include="WithingsAppCredentials.cs" />
