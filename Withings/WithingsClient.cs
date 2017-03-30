@@ -46,7 +46,7 @@ namespace Withings.API.Portable
             this.AccessToken = accessToken;
         }
 
-        public async Task<Activity>GetDayActivityAsync(string Now, string userId)
+        public async Task<Activity>GetDayActivityAsync(string date, string userId)
         {
             var appCredentials = AppCredentials.ToString();
 
@@ -56,7 +56,7 @@ namespace Withings.API.Portable
                 .OrderBy(p => p.Key);
 
 
-            string requestUri = $"https://wbsapi.withings.net/measure?action=getmeas&userid={userId}&";
+            string requestUri = $"https://wbsapi.withings.net/measure?action=getmeas&userid={userId}&date={date}";
 
             requestUri += string.Join("&", oAuth_params.Select(kvp => kvp.Key + "=" + kvp.Value));
 
@@ -75,7 +75,7 @@ namespace Withings.API.Portable
             {
                 UserId = (int)o["body"]["userid"],
                 Calories = (float)o["body"]["calories"],
-                Date = (DateTime)o["body"]["date"],
+                Date = (string)o["body"]["date"],
                 Distance = (float)o["body"]["distance"],
                 Elevation = (float)o["body"]["elevation"],
                 Intense = (int)o["body"]["intese"],
@@ -84,14 +84,14 @@ namespace Withings.API.Portable
                 Status = (string)o["body"]["status"],
                 Steps = (int)o["body"]["steps"],
                 TimeZone = (string)o["body"]["timezone"],
-                TotalCalories = (float)o["body"]["totalcalories"] 
+                TotalCalories = (float)o["body"]["totalcalories"]
 
 
             });
 
 
         }
-        //string withingsDateApiUrl = "&date=";
+       
 
         //string withingsStartDateApiUrl = "&startdateymd=";
 

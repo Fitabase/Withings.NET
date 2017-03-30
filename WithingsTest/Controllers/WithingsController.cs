@@ -95,23 +95,25 @@ namespace WithingsTest.Controllers
             //Awaiting Method from WithingsAppAuthenticator Class to return 
             AccessToken accessTokenResponse = await withingsAppConstructor.AccessTokenFlow(requestTokenSession, oAuthVerifier);
 
+            Session["accessToken"] = accessTokenResponse;
 
             string userId = Request.QueryString["userid"];
             Session["UserId"] = userId;
 
-            WithingsClient accessToken = new WithingsClient(appCredentials, (AccessToken)accessTokenResponse);
+           
 
             WithingsClient client = new WithingsClient(appCredentials, accessTokenResponse);
 
 
-            string date = DateTime.Now.ToString("yyyyMMDD"); 
-            var redirect = await client.GetDayActivityAsync(date,userId);
-          ViewBag.GetClientData = redirect 
+            string date = DateTime.Now.ToString("yyyy-MM-dd"); 
+            var redirect = GetWithingsClient(date,userId);
+            ViewBag.GetClientData = redirect; 
             return View("AccessTokenFlow");
         }
 
-        public async Task<ActionResult> GetWithingsClient(AccessToken accessToken, DateTime currentDate)
+        public async Task<ActionResult> GetWithingsClient(string userid, string currentDate)
         {
+            var accessToken = Session["accessToken"] as AccessToken;
             var appCredentials = new WithingsAppCredentials()
             {
                 ConsumerKey = ConfigurationManager.AppSettings["WithingsConsumerKey"],
@@ -119,14 +121,12 @@ namespace WithingsTest.Controllers
             };
             
             var userId = Session["UserId"].ToString();
-          
-            WithingsClient client = new WithingsClient(appCredentials,accessToken);
 
-            //client = OAuthUtility.CreateOAuthClient(appCredentials, accessToken);
+            WithingsClient client = new WithingsClient(appCredentials,accessToken);
 
             var response = await client.GetDayActivityAsync(currentDate,userId);
 
-            return View();
+            return View("AccessTokenFlow");
 
         }
     }
