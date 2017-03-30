@@ -9,7 +9,7 @@ namespace Withings.API.Portable.Models
     public class Activity
     {
        public int UserId { get; set; }
-       public DateTime Date { get; set; }
+       public string Date { get; set; }
        public string TimeZone { get; set; } 
        public int Steps { get; set; }
        public float Distance { get; set; }

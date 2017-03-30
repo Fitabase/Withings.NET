@@ -32,6 +32,9 @@ namespace Withings.API.Portable
                     //ConfigureAuthorizationHeader();
             }
         }
+
+       
+
         /// <summary>
         /// The httpclient which will be used for the api calls through the FitbitClient instance
         /// </summary>
@@ -43,7 +46,7 @@ namespace Withings.API.Portable
             this.AccessToken = accessToken;
         }
 
-        public async Task<Activity>GetDayActivityAsync(DateTime activityDate, string userId)
+        public async Task<Activity>GetDayActivityAsync(string Now, string userId)
         {
             var appCredentials = AppCredentials.ToString();
 

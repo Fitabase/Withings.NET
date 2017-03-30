@@ -94,8 +94,19 @@ namespace WithingsTest.Controllers
             
             //Awaiting Method from WithingsAppAuthenticator Class to return 
             AccessToken accessTokenResponse = await withingsAppConstructor.AccessTokenFlow(requestTokenSession, oAuthVerifier);
-      
-          
+
+
+            string userId = Request.QueryString["userid"];
+            Session["UserId"] = userId;
+
+            WithingsClient accessToken = new WithingsClient(appCredentials, (AccessToken)accessTokenResponse);
+
+            WithingsClient client = new WithingsClient(appCredentials, accessTokenResponse);
+
+
+            string date = DateTime.Now.ToString("yyyyMMDD"); 
+            var redirect = await client.GetDayActivityAsync(date,userId);
+          ViewBag.GetClientData = redirect 
             return View("AccessTokenFlow");
         }
 
@@ -106,8 +117,8 @@ namespace WithingsTest.Controllers
                 ConsumerKey = ConfigurationManager.AppSettings["WithingsConsumerKey"],
                 ConsumerSecret = ConfigurationManager.AppSettings["WithingsConsumerSecret"]
             };
-            string userId = Request.QueryString["userid"];
-            Session["UserId"] = userId;
+            
+            var userId = Session["UserId"].ToString();
           
             WithingsClient client = new WithingsClient(appCredentials,accessToken);
 
