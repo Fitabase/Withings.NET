@@ -5,15 +5,34 @@
 }
 
 <h2>GetWithingsClient</h2>
-<div>
-   
-  
-    <p>Date: @ViewBag.ResponseData.Date</p>
+<div class="row">
+
+    <div class="col-xs-6">
+        <p>Date: @ViewBag.ResponseData.Date</p>
+    </div>
+    <div class="col-xs-6">
     <p>Calories: @ViewBag.ResponseData.Calories</p>
+</div>
+<div class="col-xs-6">
     <p>Steps: @ViewBag.ResponseData.Steps</p>
+</div>
+    <div class="col-xs-6">
     <p>TimeZone: @ViewBag.ResponseData.TimeZone</p>
+</div>
+<div class="col-xs-6">
     <p>Total Calories: @ViewBag.ResponseData.TotalCalories</p>
+</divclass="col-xs-6">
 
     </div>
 
+    
+
 <p><a href="http://localhost:49932/Withings/GetWithingsBodyMeas" class="btn btn-primary btn-lg">Check your BloodPressure &raquo;</a></p>
+    <div>
+        <div>
+            @foreach (var pb in ViewBag.BloodPressueResponse)
+        {
+            <p>@ViewBag.BloodPressueResponse.[0]</p>
+        }
+    </div>
+</div>

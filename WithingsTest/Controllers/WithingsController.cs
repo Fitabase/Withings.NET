@@ -145,11 +145,11 @@ namespace WithingsTest.Controllers
 
             var response = await client.GetBodyMeasureAsync(userId, deviceType);
 
-            ViewBag.ResponseData = response;
+            ViewBag.BloodPressueResponse = response;
 
 
 
-            return View("GetWithingsBodyMeas");
+            return View("GetWithingsClient");
 
         }
     }

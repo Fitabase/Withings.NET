@@ -192,7 +192,6 @@
     <Content Include="Views\Withings\CallBack.cshtml" />
     <Content Include="Views\Withings\AccessTokenFlow.cshtml" />
     <Content Include="Views\Withings\GetWithingsClient.cshtml" />
-    <Content Include="Views\Withings\GetWithingsBodyMeas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
