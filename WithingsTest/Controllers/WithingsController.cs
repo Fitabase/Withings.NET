@@ -128,6 +128,7 @@ namespace WithingsTest.Controllers
 
         }
 
+
         public async Task<ActionResult> GetWithingsBodyMeas(string userid, string devType)
         {
             var accessToken = Session["accessToken"] as AccessToken;
@@ -149,7 +150,7 @@ namespace WithingsTest.Controllers
 
 
 
-            return View("GetWithingsClient");
+            return View("GetWithingsBodyMeas");
 
         }
     }

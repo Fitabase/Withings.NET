@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "GetWithingsBodyMeas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetWithingsBodyMeas</h2>
+<div>
+    <ul>
+        @foreach (var x in ViewBag.BloodPressueResponse)
+    {
+   
+    <li>Diastolic (Lower)@x.Measures[0].Value </li>
+
+        }
+</ul>
+</div>
+
+
+

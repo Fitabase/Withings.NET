@@ -54,7 +54,7 @@ namespace Withings.API.Portable
             this.AccessToken = accessToken;
         }
 
-        public async Task<Activity>GetDayActivityAsync(string date, string userId)
+        public async Task<Activity>GetDayActivityAsync(string Currentdate, string userId)
         {
             var appCredentials = AppCredentials.ToString();
 
@@ -64,6 +64,7 @@ namespace Withings.API.Portable
                 .OrderBy(p => p.Key);
 
             string startdate = ("2017-02-30");
+            string date = ("2017-03-24");
 
             string requestUri = $"https://wbsapi.withings.net/v2/measure?action=getactivity&userid={userId}&date={date}&";
 
