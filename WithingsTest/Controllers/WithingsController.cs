@@ -147,6 +147,8 @@ namespace WithingsTest.Controllers
 
             ViewBag.ResponseData = response;
 
+
+
             return View("GetWithingsBodyMeas");
 
         }

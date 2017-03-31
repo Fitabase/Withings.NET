@@ -15,23 +15,23 @@
             OAuth1 is now a relativly deprecitated Authorization process that requires the follow steps to access Information. 
         </p>
     </div>
-    <div class="col-md-4">
+    <div class="col-xs-6">
         <h2>Step One:Consumer Key/Secret</h2>
         <p>Provide a Consumer Key and Consumer Secret given to you by the developement team of your product. </p>
     </div>
-    <div class="col-md-4">
+    <div class="col-xs-6">
         <h2>Step Two:Request Token</h2>
         <p>Sending out your Key and Secret you request the Website to give you a token called a Request Token. If they recognize the Secret and Key you are granted a Request Token. This new token is only valid for two minutes typically.</p>      
     </div>
-    <div class="col-md-4">
+    <div class="col-xs-6">
         <h2>Step Three:Authorization Token and Secret</h2>
         <p>Once you get a Request Token, you are typically reidrected or prompted to redirect to the website's Authorization page asking you if your site is allowed to access your information.If you allow you will be redirected with an Authorization Token and Secret.</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-xs-6">
         <h2>Step Four:Access Token</h2>
         <p>Once you have authorized your site to access your data, you are redireced to your site. Typically at the same time you are submitting a request for an Access Token to access the data. Once this is granted you are given an Access Token and Secret.</p>
     </div>
-    <div class="col-md-4">
+    <div class="ccol-xs-6">
         <h2>Step Five: Get your Information</h2>
         <p> Now that you have your access token, you can create a signature hash code that takes your consumer Key and access token, timestamp, a special secret code called a nonce that is just to assure you are creating a unique call every time, and your sites url to hash together and create special encoded string to pass into the GET method. </p>
         <p> Sending out for your information is now all you have left to do.</p>
